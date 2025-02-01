@@ -1,7 +1,7 @@
 package com.nerodev.optimaltic.data
 
 enum class Player { X, O, NONE }
-enum class Difficulty { STANDARD, IMPOSSIBLE }
+enum class Difficulty { Standard, Impossible }
 
 data class GameState(
     val board: List<Player> = List(9) { Player.NONE },

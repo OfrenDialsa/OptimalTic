@@ -23,7 +23,8 @@ class MainViewModel : ViewModel() {
     private val _draws = MutableLiveData(0)
     val draws: LiveData<Int> = _draws
 
-    var difficulty: Difficulty = Difficulty.STANDARD
+    private val _difficulty = MutableLiveData(Difficulty.Standard)
+    val difficulty: LiveData<Difficulty> = _difficulty
 
     fun makeMove(index: Int) {
         val currentState = _state.value ?: return
@@ -59,9 +60,9 @@ class MainViewModel : ViewModel() {
             delay(1000L)
 
             val currentState = _state.value ?: return@launch
-            val bestMove = when (difficulty) {
-                Difficulty.IMPOSSIBLE -> findBestMove(currentState.board) // Minimax AI
-                Difficulty.STANDARD -> findRandomMove(currentState.board) // Random move
+            val bestMove = when (_difficulty.value ?: Difficulty.Standard) {
+                Difficulty.Impossible -> findBestMove(currentState.board) // Minimax AI
+                Difficulty.Standard -> findRandomMove(currentState.board) // Random move
             }
 
             if (bestMove != -1) {
@@ -143,6 +144,11 @@ class MainViewModel : ViewModel() {
 
     fun restartGame() {
         _state.value = GameState()
+    }
+
+    fun setDifficulty(newDifficulty: Difficulty) {
+        _difficulty.value = newDifficulty
+        resetGame()
     }
 
     fun resetGame() {

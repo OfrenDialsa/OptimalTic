@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -42,8 +43,10 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
     val oWins = viewModel.oWins.observeAsState(initial = 0).value
     val xWins = viewModel.xWins.observeAsState(initial = 0).value
     val draws = viewModel.draws.observeAsState(initial = 0).value
+    val difficulty = viewModel.difficulty.observeAsState(initial = Difficulty.Standard).value
 
-    var showDifficultyDialog = remember { mutableStateOf(false) }
+    var showConfirmDialog = remember { mutableStateOf(false) }
+    var pendingDifficultyChange = remember { mutableStateOf<Difficulty?>(null) }
     val textColor = MaterialTheme.colorScheme.onBackground
     val fadedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
 
@@ -106,7 +109,7 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
                 }
 
                 Text(
-                    text = "Difficulty: ${viewModel.difficulty}",
+                    text = "Game Mode: $difficulty",
                     fontSize = 16.sp,
                     color = Color.Gray,
                     modifier = Modifier.padding(bottom = 8.dp)
@@ -127,39 +130,63 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
                 Row {
                     Button(
                         onClick = { viewModel.restartGame() },
+                        colors = ButtonColors(
+                            containerColor = Color.Gray,
+                            contentColor = Color.Unspecified,
+                            disabledContainerColor = Color.Gray,
+                            disabledContentColor = Color.Unspecified
+                        )
                     ) {
                         Text(text = if(gameState.isGameOver) "Play Again?" else "Restart Game", modifier = Modifier.padding(horizontal = 6.dp))
                     }
                     Spacer(Modifier.width(4.dp))
 
                     Button(
-                        onClick = { showDifficultyDialog.value = true },
-                    ) {
-                        Text(
-                            text = "Change Difficulty",
+                        onClick = {
+                            val currentIndex = Difficulty.entries.indexOf(difficulty)
+                            val nextDifficulty = Difficulty.entries[(currentIndex + 1) % Difficulty.entries.size]
+
+                            if (nextDifficulty == Difficulty.Impossible) {
+                                pendingDifficultyChange.value = nextDifficulty
+                                showConfirmDialog.value = true
+                            } else {
+                                viewModel.setDifficulty(nextDifficulty)
+                            }
+                        },
+                        colors = ButtonColors(
+                            containerColor = Color.Gray,
+                            contentColor = Color.Unspecified,
+                            disabledContainerColor = Color.Gray,
+                            disabledContentColor = Color.Unspecified
                         )
+                    ) {
+                        Text("Mode: $difficulty")
                     }
                 }
             }
 
-            if (showDifficultyDialog.value) {
+            if (showConfirmDialog.value) {
                 AlertDialog(
-                    onDismissRequest = { showDifficultyDialog.value = false },
-                    title = { Text("Select Difficulty") },
-                    text = { Text("Choose your preferred difficulty level") },
+                    onDismissRequest = { showConfirmDialog.value = false },
+                    title = { Text("Are you sure?") },
+                    text = { Text("Change mode to Impossible?") },
                     confirmButton = {
-                        Row {
-                            Difficulty.entries.forEach { difficulty ->
-                                TextButton(
-                                    onClick = {
-                                        viewModel.difficulty = difficulty
-                                        viewModel.resetGame()
-                                        showDifficultyDialog.value = false
-                                    }
-                                ) {
-                                    Text(difficulty.name)
+                        TextButton(
+                            onClick = {
+                                pendingDifficultyChange.value?.let {
+                                    viewModel.setDifficulty(it)
                                 }
+                                showConfirmDialog.value = false
                             }
+                        ) {
+                            Text("Yes")
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = { showConfirmDialog.value = false }
+                        ) {
+                            Text("No")
                         }
                     }
                 )
