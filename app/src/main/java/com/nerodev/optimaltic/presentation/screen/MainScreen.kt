@@ -128,7 +128,7 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
                     Button(
                         onClick = { viewModel.restartGame() },
                     ) {
-                        Text(text = if(gameState.isGameOver) "Play Again" else "Restart Game", modifier = Modifier.padding(horizontal = 6.dp))
+                        Text(text = if(gameState.isGameOver) "Play Again?" else "Restart Game", modifier = Modifier.padding(horizontal = 6.dp))
                     }
                     Spacer(Modifier.width(4.dp))
 
