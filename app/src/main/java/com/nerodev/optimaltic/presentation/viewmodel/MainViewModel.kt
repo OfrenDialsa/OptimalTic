@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nerodev.optimaltic.data.model.Difficulty
-import com.nerodev.optimaltic.data.model.GameState
-import com.nerodev.optimaltic.data.model.Player
+import com.nerodev.optimaltic.data.Difficulty
+import com.nerodev.optimaltic.data.GameState
+import com.nerodev.optimaltic.data.Player
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

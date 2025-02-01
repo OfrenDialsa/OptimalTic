@@ -29,9 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nerodev.optimaltic.data.model.Difficulty
-import com.nerodev.optimaltic.data.model.GameState
-import com.nerodev.optimaltic.data.model.Player
+import com.nerodev.optimaltic.data.Difficulty
+import com.nerodev.optimaltic.data.GameState
+import com.nerodev.optimaltic.data.Player
 import com.nerodev.optimaltic.presentation.component.Board
 import com.nerodev.optimaltic.presentation.viewmodel.MainViewModel
 
