@@ -43,7 +43,7 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
     val oWins = viewModel.oWins.observeAsState(initial = 0).value
     val xWins = viewModel.xWins.observeAsState(initial = 0).value
     val draws = viewModel.draws.observeAsState(initial = 0).value
-    val difficulty = viewModel.difficulty.observeAsState(initial = Difficulty.Standard).value
+    val difficulty = viewModel.difficulty.observeAsState(initial = Difficulty.Normal).value
 
     var showConfirmDialog = remember { mutableStateOf(false) }
     var pendingDifficultyChange = remember { mutableStateOf<Difficulty?>(null) }
