@@ -28,6 +28,7 @@ class MainViewModel : ViewModel() {
 
     fun makeMove(index: Int) {
         val currentState = _state.value ?: return
+        val currentDifficulty = _difficulty.value ?: Difficulty.Normal
 
         if (currentState.board[index] == Player.NONE && !currentState.isGameOver) {
             val newBoard = currentState.board.toMutableList()
@@ -49,7 +50,10 @@ class MainViewModel : ViewModel() {
                 }
             }
 
-            if (_state.value?.currentPlayer == Player.O && !_state.value?.isGameOver!!) {
+            // Only trigger bot move if not in multiplayer mode and it's O's turn
+            if (_state.value?.currentPlayer == Player.O &&
+                !_state.value?.isGameOver!! &&
+                currentDifficulty != Difficulty.Multiplayer) {
                 botMove()
             }
         }
@@ -63,6 +67,7 @@ class MainViewModel : ViewModel() {
             val bestMove = when (_difficulty.value ?: Difficulty.Normal) {
                 Difficulty.Normal -> findRandomMove(currentState.board) // Random move
                 Difficulty.Impossible -> findBestMove(currentState.board) // Minimax AI
+                Difficulty.Multiplayer -> findBestMove(currentState.board)
             }
 
             if (bestMove != -1) {
