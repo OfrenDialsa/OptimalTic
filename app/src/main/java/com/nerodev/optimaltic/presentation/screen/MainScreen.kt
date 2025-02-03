@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.DropdownMenu
@@ -19,7 +18,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -31,16 +29,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nerodev.optimaltic.data.Difficulty
-import com.nerodev.optimaltic.data.GameState
-import com.nerodev.optimaltic.data.Player
+import com.nerodev.optimaltic.domain.model.Difficulty
+import com.nerodev.optimaltic.domain.model.GameState
+import com.nerodev.optimaltic.domain.model.Player
 import com.nerodev.optimaltic.presentation.component.Board
-import com.nerodev.optimaltic.presentation.viewmodel.MainViewModel
+import com.nerodev.optimaltic.presentation.viewmodel.MainViewModelImpl
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: MainViewModel = viewModel()) {
+fun MainScreen(viewModel: MainViewModelImpl = koinViewModel()) {
     val gameState = viewModel.state.observeAsState(initial = GameState()).value
     val oWins = viewModel.oWins.observeAsState(initial = 0).value
     val xWins = viewModel.xWins.observeAsState(initial = 0).value
@@ -122,7 +120,6 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
 
                 Board(
                     board = gameState.board,
-                    // Board is always clickable in multiplayer mode
                     isPlayerTurn = difficulty == Difficulty.Multiplayer || gameState.currentPlayer == Player.X,
                     onCellClick = { index -> viewModel.makeMove(index) }
                 )

@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
+    // Koin
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.core)
+
     // Navigation
     implementation(libs.androidx.navigation.compose)
 
