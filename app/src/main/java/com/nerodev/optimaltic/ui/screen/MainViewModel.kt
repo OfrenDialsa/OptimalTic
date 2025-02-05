@@ -1,12 +1,12 @@
-package com.nerodev.optimaltic.viewmodel
+package com.nerodev.optimaltic.ui.screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nerodev.optimaltic.model.Difficulty
-import com.nerodev.optimaltic.model.GameState
-import com.nerodev.optimaltic.model.Player
+import com.nerodev.optimaltic.data.model.Difficulty
+import com.nerodev.optimaltic.data.model.GameState
+import com.nerodev.optimaltic.data.model.Player
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

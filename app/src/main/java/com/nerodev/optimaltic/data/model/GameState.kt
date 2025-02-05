@@ -1,4 +1,4 @@
-package com.nerodev.optimaltic.model
+package com.nerodev.optimaltic.data.model
 
 data class GameState(
     val board: List<Player> = List(9) { Player.NONE },

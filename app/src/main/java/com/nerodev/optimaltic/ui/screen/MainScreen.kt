@@ -1,4 +1,4 @@
-package com.nerodev.optimaltic.view
+package com.nerodev.optimaltic.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,10 +30,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nerodev.optimaltic.viewmodel.MainViewModel
-import com.nerodev.optimaltic.model.Difficulty
-import com.nerodev.optimaltic.model.GameState
-import com.nerodev.optimaltic.model.Player
+import com.nerodev.optimaltic.data.model.Difficulty
+import com.nerodev.optimaltic.data.model.GameState
+import com.nerodev.optimaltic.data.model.Player
+import com.nerodev.optimaltic.ui.component.Board
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

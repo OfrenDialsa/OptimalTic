@@ -1,4 +1,4 @@
-package com.nerodev.optimaltic.core.ui.theme
+package com.nerodev.optimaltic.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

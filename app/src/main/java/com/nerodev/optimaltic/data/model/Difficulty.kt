@@ -1,3 +1,3 @@
-package com.nerodev.optimaltic.model
+package com.nerodev.optimaltic.data.model
 
 enum class Difficulty { Normal, Impossible, Multiplayer }
