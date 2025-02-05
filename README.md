@@ -20,7 +20,7 @@ _Add some screenshots here_
 - **Kotlin** - Primary programming language 🏗️
 - **Jetpack Compose** - Modern UI toolkit 🎭
 - **Minimax Algorithm** - AI for Impossible mode 🤖
-- **Clean and MVVM Architecture** - Clean architecture and MVVM for better maintainability 📌
+- **Clean and MVVM Architecture** - Clean and MVVM for better maintainability 📌
 
 ## How to Play 🎲
 
