@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.nerodev.optimaltic.core.ui.theme.NeuralTacTheme
-import com.nerodev.optimaltic.presentation.screen.MainScreen
+import com.nerodev.optimaltic.view.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

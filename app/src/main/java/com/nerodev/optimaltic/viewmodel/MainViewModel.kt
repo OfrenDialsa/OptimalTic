@@ -1,12 +1,12 @@
-package com.nerodev.optimaltic.presentation.viewmodel
+package com.nerodev.optimaltic.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nerodev.optimaltic.data.Difficulty
-import com.nerodev.optimaltic.data.GameState
-import com.nerodev.optimaltic.data.Player
+import com.nerodev.optimaltic.model.Difficulty
+import com.nerodev.optimaltic.model.GameState
+import com.nerodev.optimaltic.model.Player
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,7 +50,6 @@ class MainViewModel : ViewModel() {
                 }
             }
 
-            // Only trigger bot move if not in multiplayer mode and it's O's turn
             if (_state.value?.currentPlayer == Player.O &&
                 !_state.value?.isGameOver!! &&
                 currentDifficulty != Difficulty.Multiplayer) {

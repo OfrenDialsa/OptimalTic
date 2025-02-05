@@ -1,4 +1,4 @@
-package com.nerodev.optimaltic.presentation.component
+package com.nerodev.optimaltic.view
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nerodev.optimaltic.data.Player
+import com.nerodev.optimaltic.model.Player
 
 @Composable
 fun Board(
