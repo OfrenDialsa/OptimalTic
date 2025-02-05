@@ -13,16 +13,13 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    // Provide GameRepository implementation
     single<GameRepository> { GameRepositoryImpl() }
 
-    // Provide Use Cases
     factory { MakeMoveUseCase(get()) }
     factory { GetBotMoveUseCase(get()) }
     factory { CheckWinnerUseCase(get()) }
     factory { RestartGameUseCase(get()) }
     factory { SetDifficultyUseCase(get()) }
 
-    // Provide ViewModel
     viewModel { MainViewModelImpl(get(), get(), get(), get(), get()) }
 }
