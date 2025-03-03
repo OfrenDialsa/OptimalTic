@@ -39,12 +39,14 @@ import com.nerodev.optimaltic.ui.component.Board
 @Composable
 fun MainScreen(viewModel: MainViewModel = viewModel()) {
     val gameState = viewModel.state.observeAsState(initial = GameState()).value
+
     val oWins = viewModel.oWins.observeAsState(initial = 0).value
     val xWins = viewModel.xWins.observeAsState(initial = 0).value
     val draws = viewModel.draws.observeAsState(initial = 0).value
-    val difficulty = viewModel.difficulty.observeAsState(initial = Difficulty.Normal).value
 
+    val difficulty = viewModel.difficulty.observeAsState(initial = Difficulty.Normal).value
     var showDifficultyMenu = remember { mutableStateOf(false) }
+
     val textColor = MaterialTheme.colorScheme.onBackground
     val fadedTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
 
@@ -119,7 +121,6 @@ fun MainScreen(viewModel: MainViewModel = viewModel()) {
 
                 Board(
                     board = gameState.board,
-                    // Board is always clickable in multiplayer mode
                     isPlayerTurn = difficulty == Difficulty.Multiplayer || gameState.currentPlayer == Player.X,
                     onCellClick = { index -> viewModel.makeMove(index) }
                 )
